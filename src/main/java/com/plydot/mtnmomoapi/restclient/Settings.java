@@ -11,12 +11,6 @@ public final class Settings {
         return ourInstance;
     }
 
-    public static Settings getInstance(String apiKey, String userId) {
-        ourInstance.setApiKey(apiKey);
-        ourInstance.setUserId(userId);
-        return ourInstance;
-    }
-
     private Settings() {
     }
 
@@ -28,6 +22,7 @@ public final class Settings {
     private CreateApiUserBody createApiUserBody;
     private TokenResponse accessToken;
     private String enviroment;
+    private String currency;
 
     public String getApiKey() {
         return apiKey;
@@ -98,5 +93,13 @@ public final class Settings {
 
     public void setEnviroment(String enviroment) {
         this.enviroment = enviroment;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

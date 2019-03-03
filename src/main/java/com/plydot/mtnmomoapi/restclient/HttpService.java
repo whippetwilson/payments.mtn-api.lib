@@ -40,8 +40,8 @@ class HttpService {
             // Request customization: add request headers
             Request.Builder requestBuilder = original.newBuilder();
             requestBuilder.addHeader("Accept", "application/json");
-            if (settings.getAuthorization() != null)
-                requestBuilder.addHeader(Headers.AUTHORIZATION, settings.getAuthorization());
+//            if (settings.getAuthorization() != null)
+//                requestBuilder.addHeader(Headers.AUTHORIZATION, settings.getAuthorization());
             if (settings.getPrimarySubscriptionKey() != null)
                 requestBuilder.addHeader(Headers.SUBSCRIPTION_KEY, settings.getPrimarySubscriptionKey());
             if (settings.getxReferenceId() != null){
@@ -52,9 +52,10 @@ class HttpService {
             }
             if (settings.getAccessToken() != null) {
                 requestBuilder.addHeader(Headers.AUTHORIZATION, settings.getAccessToken().getAccessToken());
-            }
-
+            }else if (settings.getAuthorization() != null)
+                requestBuilder.addHeader(Headers.AUTHORIZATION, settings.getAuthorization());
             Request request = requestBuilder.build();
+            System.out.println(new Gson().toJson(request));
             return chain.proceed(request);
         });
 
