@@ -1,6 +1,9 @@
 package com.plydot.mtnmomoapi.restclient;
 
 import com.plydot.mtnmomoapi.model.*;
+import com.plydot.mtnmomoapi.model.collections.AccountBalance;
+import com.plydot.mtnmomoapi.model.collections.Request2Pay;
+import com.plydot.mtnmomoapi.model.collections.Request2PayStatus;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -16,6 +19,9 @@ interface IApi {
     @POST("/disbursement/token/")
     Call<TokenResponse> getDisbToken();
 
+    @POST("/collection/token/")
+    Call<TokenResponse> getCollectionToken();
+
     @POST("/v1_0/apiuser")
     Call<Void> createApiUser(@Body CreateApiUserBody createApiUserBody);
 
@@ -27,4 +33,16 @@ interface IApi {
 
     @GET("/disbursement/v1_0/account/balance")
     Call<CheckBalanceResponse> checkAccountBalance();
+
+    @POST("/collection/v1_0/requesttopay")
+    Call<Void> request2Pay(@Body Request2Pay request2Pay);
+
+    @GET("/collection/v1_0/requesttopay/{reference}")
+    Call<Request2PayStatus> checkRequest2Status(@Path("reference") String reference);
+
+    @GET("/collection/v1_0/accountholder/{accountHolderIdType}/{accountHolderId}/active")
+    Call<Void> isAccountHolderActive(@Path("accountHolderIdType") String accountHolderIdType, @Path("accountHolderId") String accountHolderId);
+
+    @GET("/collection/v1_0/account/balance")
+    Call<AccountBalance> getCollectionsAccountBalance();
 }
