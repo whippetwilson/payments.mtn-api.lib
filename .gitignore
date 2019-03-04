@@ -107,4 +107,5 @@ hs_err_pid*
 
 /mvnw
 /mvnw.cmd
-/target/
+/mtnmomo.iml
+/mtnmomoapi.iml
