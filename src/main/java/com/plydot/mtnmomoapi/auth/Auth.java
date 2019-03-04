@@ -17,6 +17,7 @@ public class Auth {
     private static Auth auth = new Auth();
     private String XReferenceId;
     private String primarySubscriptionKey;
+    private GetApiKeyResponse apiKey = null;
 
     private Auth() {
     }
@@ -45,7 +46,7 @@ public class Auth {
         return routines.getUser();
     }
 
-    public GetApiKeyResponse getApiKey(){
+    private GetApiKeyResponse getApiKey(){
         settings.setxReferenceId(XReferenceId);
         settings.setPrimarySubscriptionKey(primarySubscriptionKey);
         settings.setAccessToken(null);
@@ -55,15 +56,19 @@ public class Auth {
 
     public TokenResponse getToken(Products productId) throws IllegalAccessException {
         settings.setxReferenceId(XReferenceId);
-        GetApiKeyResponse apiKey = getApiKey();
-        if (apiKey.getStatus().equals(Status.OK.toString())) {
-            settings.setApiKey(apiKey.getApiKey());
+        if (this.apiKey != null && this.apiKey.getStatus().equals(Status.OK.toString())){
+            settings.setApiKey(this.apiKey.getApiKey());
             settings.setPrimarySubscriptionKey(primarySubscriptionKey);
             settings.setAccessToken(null);
             routines.setSettings(settings);
             return routines.getToken(productId);
         }else {
-            throw new IllegalArgumentException("API KEY NOT_FOUND, DID YOU INITIALIZE AN API USER?");
+            this.apiKey = getApiKey();
+            if (this.apiKey.getStatus().equals(Status.OK.toString())) {
+                return getToken(productId);
+            }else {
+                throw new IllegalArgumentException("API KEY NOT_FOUND, DID YOU INITIALIZE AN API USER?");
+            }
         }
     }
 

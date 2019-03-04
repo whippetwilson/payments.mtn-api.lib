@@ -1,7 +1,7 @@
 package com.plydot.mtnmomoapi.utils;
 
 public enum  PayeIDType {
-    MSISDN("MSISDN"),
+    MSISDN("msisdn"),
     EMAIL("EMAIL"),
     PARTY_CODE("PARTY_CODE");
 

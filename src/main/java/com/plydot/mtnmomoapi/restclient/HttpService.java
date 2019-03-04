@@ -23,8 +23,7 @@ class HttpService {
     }
 
     public IApi service() {
-        GsonBuilder builder = new GsonBuilder()
-                .serializeNulls();
+        GsonBuilder builder = new GsonBuilder();
         Gson gson = ThreeTenGsonAdapter.registerAll(builder)
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter())
                 .create();
@@ -40,8 +39,6 @@ class HttpService {
             // Request customization: add request headers
             Request.Builder requestBuilder = original.newBuilder();
             requestBuilder.addHeader("Accept", "application/json");
-//            if (settings.getAuthorization() != null)
-//                requestBuilder.addHeader(Headers.AUTHORIZATION, settings.getAuthorization());
             if (settings.getPrimarySubscriptionKey() != null)
                 requestBuilder.addHeader(Headers.SUBSCRIPTION_KEY, settings.getPrimarySubscriptionKey());
             if (settings.getxReferenceId() != null){

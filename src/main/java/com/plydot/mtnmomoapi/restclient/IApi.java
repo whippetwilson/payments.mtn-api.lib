@@ -1,6 +1,7 @@
 package com.plydot.mtnmomoapi.restclient;
 
 import com.plydot.mtnmomoapi.model.*;
+import com.plydot.mtnmomoapi.model.collections.AccountBalance;
 import com.plydot.mtnmomoapi.model.collections.Request2Pay;
 import com.plydot.mtnmomoapi.model.collections.Request2PayStatus;
 import retrofit2.Call;
@@ -41,4 +42,7 @@ interface IApi {
 
     @GET("/collection/v1_0/accountholder/{accountHolderIdType}/{accountHolderId}/active")
     Call<Void> isAccountHolderActive(@Path("accountHolderIdType") String accountHolderIdType, @Path("accountHolderId") String accountHolderId);
+
+    @GET("/collection/v1_0/account/balance")
+    Call<AccountBalance> getCollectionsAccountBalance();
 }

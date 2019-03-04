@@ -1,10 +1,10 @@
 package com.plydot.mtnmomoapi.restclient;
 
-import com.google.gson.Gson;
 import com.plydot.mtnmomoapi.model.CheckBalanceResponse;
 import com.plydot.mtnmomoapi.model.GetApiKeyResponse;
 import com.plydot.mtnmomoapi.model.GetUserResponse;
 import com.plydot.mtnmomoapi.model.TokenResponse;
+import com.plydot.mtnmomoapi.model.collections.AccountBalance;
 import com.plydot.mtnmomoapi.model.collections.Request2Pay;
 import com.plydot.mtnmomoapi.model.collections.Request2PayStatus;
 import com.plydot.mtnmomoapi.products.Products;
@@ -35,8 +35,9 @@ public class HttpRoutines {
     }
 
     private void checkResponse(Response response) throws IOException {
-        if (!response.isSuccessful())
+        if (!response.isSuccessful()) {
             throw new IOException(response.message());
+        }
     }
 
     public TokenResponse getToken(Products product) throws IllegalAccessException {
@@ -135,7 +136,7 @@ public class HttpRoutines {
             }
         } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
             e.printStackTrace();
-            return null;
+            return new Request2PayStatus(e.getMessage());
         }
     }
 
@@ -151,7 +152,7 @@ public class HttpRoutines {
             }
         } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
             e.printStackTrace();
-            return null;
+            return new Request2PayStatus(e.getMessage());
         }
     }
 
@@ -163,6 +164,17 @@ public class HttpRoutines {
         } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
             e.printStackTrace();
             return Status.BAD_REQUEST;
+        }
+    }
+
+    public AccountBalance getCollectionsAccountBalance(){
+        try {
+            Response<AccountBalance> response = service.getCollectionsAccountBalance().execute();
+            checkResponse(response);
+            return response.body();
+        } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return new AccountBalance(e.getMessage());
         }
     }
 }
