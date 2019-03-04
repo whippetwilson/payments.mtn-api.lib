@@ -64,7 +64,7 @@
                     <localCheckout>true</localCheckout>
                     <pushChanges>false</pushChanges>
                     <mavenExecutorId>forked-path</mavenExecutorId>
-                    <arguments>-Dgpg.passphrase=glosh1990</arguments>
+                    <arguments>-Dgpg.passphrase=xxxxxxx</arguments>
                 </configuration>
                 <dependencies>
                     <dependency>
