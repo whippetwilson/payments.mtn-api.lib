@@ -104,9 +104,9 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git://github.com/plydot/mtn-momo-java-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:plydot/mtn-momo-java-plugin.git</developerConnection>
-        <url>https://github.com/plydot/mtn-momo-java-plugin.git</url>
+        <connection>scm:git:git://github.com/whippetwilson/mtn-momo-java-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:whippetwilson/mtn-momo-java-plugin.git</developerConnection>
+        <url>https://github.com/whippetwilson/mtn-momo-java-plugin.git</url>
         <tag>mtnmomoapi-1.0</tag>
     </scm>
 
