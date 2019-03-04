@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.plydot.mtnmomoapi</groupId>
     <artifactId>mtnmomoapi</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.4</version>
     <packaging>jar</packaging>
     <name>mtn-momoapi-java-plugin</name>
     <build>
@@ -108,7 +108,7 @@
         <connection>scm:git:git://github.com/plydot/mtn-momo-java-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:plydot/mtn-momo-java-plugin.git</developerConnection>
         <url>https://github.com/plydot/mtn-momo-java-plugin.git</url>
-        <tag>HEAD</tag>
+        <tag>mtnmomoapi-1.4</tag>
     </scm>
 
     <profiles>
