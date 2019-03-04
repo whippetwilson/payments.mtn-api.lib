@@ -17,7 +17,7 @@ public interface ICollections {
 
     /**
      * Gets the current api user if created.
-     * @return @see GetUserResponse
+     * @return Target Env and Status
      */
     GetUserResponse getUser();
 
@@ -44,7 +44,7 @@ public interface ICollections {
 
     /**
      * Get your collections account balance
-     * @return Account balance & currency
+     * @return Account balance with currency
      */
     AccountBalance getCollectionsBalance();
 
