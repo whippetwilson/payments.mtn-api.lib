@@ -11,6 +11,9 @@ This is a java plugin to allow developers using the mtn momo api in Uganda to ge
 </dependency> 
 ~~~~
 
+## Demo 
+https://github.com/plydot/momo-plugin-demo.git
+
 ### Support or Contact
 
 Plydot Systems
