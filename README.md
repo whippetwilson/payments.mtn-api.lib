@@ -1,4 +1,4 @@
-## Welcome to Mtn Momo API Java Plugin
+## Welcome to MTN Momo API Java Library
 
 This is a java plugin to allow developers using the mtn momo api in Uganda to get ahead to productivity rather than dwell down in the semantics of authentication, authorization and request wrappers.
 
@@ -7,8 +7,13 @@ This is a java plugin to allow developers using the mtn momo api in Uganda to ge
 <dependency>
     <groupId>com.plydot</groupId>
     <artifactId>mtnmomoapi</artifactId>
-    <version>1.7</version>
+    <version>1.10</version>
 </dependency> 
+~~~~
+
+## Gradle Intergration
+~~~~
+implementation 'com.plydot:mtnmomoapi:1.10'
 ~~~~
 
 ## Demo 
