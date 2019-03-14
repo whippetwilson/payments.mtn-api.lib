@@ -66,6 +66,7 @@
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
+
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.scm</groupId>
