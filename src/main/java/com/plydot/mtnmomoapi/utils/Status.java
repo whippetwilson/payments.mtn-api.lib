@@ -5,7 +5,12 @@ public enum Status {
     BAD_REQUEST("BAD_REQUEST"),
     CREATED("CREATED"),
     ACCEPTED("ACCEPTED"),
-    INVALID("INVALID");
+    INVALID("INVALID"),
+    SUCCESSFUL("SUCCESSFUL"),
+    PENDING("PENDING"),
+    FAILED("FAILED"),
+    REJECTED("REJECTED"),
+    ONGOING("ONGOING");
 
     private final String text;
 

@@ -31,8 +31,26 @@ public class Collections implements ICollections {
 
     @Override
     public Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
+                                                       PayeIDType payeIDType, UUID externalId, String XreferenceId) {
+        return collections.request2Pay(amount, currency, account, message, payeIDType, externalId, XreferenceId);
+    }
+
+    @Override
+    public Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
+                                                       PayeIDType payeIDType) {
+        return collections.request2Pay(amount, currency, account, message, payeIDType, null, null);
+    }
+
+    @Override
+    public Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
                                                        PayeIDType payeIDType, UUID externalId) {
-        return collections.request2Pay(amount, currency, account, message, payeIDType, externalId);
+        return collections.request2Pay(amount, currency, account, message, payeIDType, externalId, null);
+    }
+
+    @Override
+    public Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
+                                                       PayeIDType payeIDType, String XreferenceId) {
+        return collections.request2Pay(amount, currency, account, message, payeIDType, null, XreferenceId);
     }
 
     @Override

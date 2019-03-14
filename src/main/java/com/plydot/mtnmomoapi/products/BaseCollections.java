@@ -26,14 +26,14 @@ class BaseCollections {
     }
 
     public TokenResponse getToken(){
-        if (this.token != null){
-            return this.token;
-        }else {
+//        if (this.token != null){
+//            return this.token;
+//        }else {
             try {
                 TokenResponse response = auth.getToken(Products.COLLECTIONS);
                 if (response != null) {
                     this.token = response;
-                    return getToken();
+                    return this.token;
                 } else {
                     throw new IllegalArgumentException("Can't get access token, check your api credentials");
                 }
@@ -41,14 +41,19 @@ class BaseCollections {
                 e.printStackTrace();
                 throw new IllegalArgumentException("Can't get access token, check your api credentials");
             }
-        }
+//        }
     }
 
     public Request2PayStatus request2Pay(String amount, String currency, String account,
-                                   String message, PayeIDType payeIDType, UUID externalId){
+                                   String message, PayeIDType payeIDType, UUID externalId, String XreferenceId){
         if (isAccountActive(account, payeIDType).toString().equals(Status.OK.toString())) {
             Request2Pay request2Pay = new Request2Pay();
-            String reference = UUID.randomUUID().toString();
+            String reference;
+            if (XreferenceId == null) {
+                reference = UUID.randomUUID().toString();
+            }else {
+                reference = XreferenceId;
+            }
             request2Pay.setAmount(amount);
             if (externalId != null) {
                 request2Pay.setExternalId(externalId.toString());

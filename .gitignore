@@ -109,3 +109,5 @@ hs_err_pid*
 /mvnw.cmd
 /mtnmomo.iml
 /mtnmomoapi.iml
+/pom.xml.releaseBackup
+/release.properties

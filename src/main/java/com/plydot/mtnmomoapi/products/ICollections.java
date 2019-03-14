@@ -33,7 +33,16 @@ public interface ICollections {
      */
 
     Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
+                                                PayeIDType payeIDType, UUID externalId, String Xreference);
+
+    Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
+                                                PayeIDType payeIDType);
+
+    Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
                                                 PayeIDType payeIDType, UUID externalId);
+
+    Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
+                                                PayeIDType payeIDType, String XreferenceId);
 
     /**
      * Checks for status of pay request
