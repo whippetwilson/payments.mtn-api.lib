@@ -1,48 +1,55 @@
 package com.plydot.mtnmomoapi.products;
 
-import com.plydot.mtnmomoapi.auth.Auth;
-import com.plydot.mtnmomoapi.model.CheckBalanceResponse;
 import com.plydot.mtnmomoapi.model.TokenResponse;
-import com.plydot.mtnmomoapi.restclient.HttpRoutines;
-import com.plydot.mtnmomoapi.restclient.Settings;
+import com.plydot.mtnmomoapi.model.TransferGetResponse;
+import com.plydot.mtnmomoapi.model.TransferPostPayload;
+import com.plydot.mtnmomoapi.model.collections.AccountBalance;
+import com.plydot.mtnmomoapi.utils.PayeIDType;
 
-public class Disbursements {
+import java.util.UUID;
 
-    private static Settings settings = Settings.getInstance();
-    private static HttpRoutines routines = new HttpRoutines();
-    private Auth auth;
+public class Disbursements extends Collections implements IDisbursements {
 
-    public Disbursements(String enviroment, Auth auth) {
-        settings.setEnviroment(enviroment);
-        this.auth = auth;
+    private BaseDisbursements disbursements;
+
+    public Disbursements(String XReferenceId, String disbursementSubscriptionKey,
+                         String callBackUrl, String enviroment) {
+        super(XReferenceId, disbursementSubscriptionKey, callBackUrl, enviroment);
+        this.disbursements = new BaseDisbursements(auth, enviroment);
     }
 
-    private TokenResponse getToken(){
-        try {
-            TokenResponse response = auth.getToken(Products.DISBURSEMENTS);
-            if (response != null){
-                return response;
-            }else {
-                throw new IllegalArgumentException("Can't get access token, check your api credentials");
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException("Can't get access token, check your api credentials");
-        }
+    @Override
+    public AccountBalance getCollectionsBalance() {
+        return disbursements.getAccountBalance();
     }
 
-    public CheckBalanceResponse checkAccountBalance() {
-        settings.setAccessToken(getToken());
-        settings.setPrimarySubscriptionKey(auth.getPrimarySubscriptionKey());
-        routines.setSettings(settings);
-        return routines.checkAccountBalance();
+    @Override
+    public TokenResponse getToken() {
+        return disbursements.getToken();
     }
 
-    public Auth getAuth() {
-        return auth;
+    @Override
+    public TransferGetResponse transfer(String amount, String currency, String account, String message, PayeIDType payeIDType) {
+        return disbursements.transfer(amount, currency, account, message, payeIDType, null, null);
     }
 
-    public void setAuth(Auth auth) {
-        this.auth = auth;
+    @Override
+    public TransferGetResponse transfer(String amount, String currency, String account, String message, PayeIDType payeIDType, UUID externalId) {
+        return disbursements.transfer(amount, currency, account, message, payeIDType, externalId, null);
+    }
+
+    @Override
+    public TransferGetResponse transfer(String amount, String currency, String account, String message, PayeIDType payeIDType, String XReferenceId) {
+        return disbursements.transfer(amount, currency, account, message, payeIDType, null, XReferenceId);
+    }
+
+    @Override
+    public TransferGetResponse transfer(String amount, String currency, String account, String message, PayeIDType payeIDType, UUID externalId, String XReferenceId) {
+        return disbursements.transfer(amount, currency, account, message, payeIDType, externalId, XReferenceId);
+    }
+
+    @Override
+    public TransferGetResponse getTransferStatus(String XReferenceId) {
+        return disbursements.checkTransferStatus(XReferenceId);
     }
 }

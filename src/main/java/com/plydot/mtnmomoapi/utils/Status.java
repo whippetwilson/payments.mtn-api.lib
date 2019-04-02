@@ -10,7 +10,9 @@ public enum Status {
     PENDING("PENDING"),
     FAILED("FAILED"),
     REJECTED("REJECTED"),
-    ONGOING("ONGOING");
+    ONGOING("ONGOING"),
+    PAYER_LIMIT_REACHED("PAYER_LIMIT_REACHED"),
+    NOT_ENOUGH_FUNDS("NOT_ENOUGH_FUNDS");
 
     private final String text;
 
