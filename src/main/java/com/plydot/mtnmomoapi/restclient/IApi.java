@@ -41,8 +41,26 @@ interface IApi {
     Call<Request2PayStatus> checkRequest2Status(@Path("reference") String reference);
 
     @GET("/collection/v1_0/accountholder/{accountHolderIdType}/{accountHolderId}/active")
-    Call<Void> isAccountHolderActive(@Path("accountHolderIdType") String accountHolderIdType, @Path("accountHolderId") String accountHolderId);
+    Call<Void> isCollectionsAccountHolderActive(
+            @Path("accountHolderIdType") String accountHolderIdType,
+            @Path("accountHolderId") String accountHolderId);
 
     @GET("/collection/v1_0/account/balance")
     Call<AccountBalance> getCollectionsAccountBalance();
+
+    //disbursements
+    @GET("/disbursement/v1_0/accountholder/{accountHolderIdType}/{accountHolderId}/active")
+    Call<Void> isDisbursementAccountHolderActive(
+            @Path("accountHolderIdType") String accountHolderIdType,
+            @Path("accountHolderId") String accountHolderId);
+
+    @GET("/disbursement/v1_0/account/balance")
+    Call<AccountBalance> getDisbursementAccountBalance();
+
+    @POST("/disbursement/v1_0/transfer")
+    Call<Void> transfer(@Body TransferPostPayload payload);
+
+    @GET("/disbursement/v1_0/transfer/{referenceId}")
+    Call<TransferGetResponse> checkTransferStatus(@Path("referenceId") String reference);
+
 }

@@ -1,9 +1,6 @@
 package com.plydot.mtnmomoapi.restclient;
 
-import com.plydot.mtnmomoapi.model.CheckBalanceResponse;
-import com.plydot.mtnmomoapi.model.GetApiKeyResponse;
-import com.plydot.mtnmomoapi.model.GetUserResponse;
-import com.plydot.mtnmomoapi.model.TokenResponse;
+import com.plydot.mtnmomoapi.model.*;
 import com.plydot.mtnmomoapi.model.collections.AccountBalance;
 import com.plydot.mtnmomoapi.model.collections.Request2Pay;
 import com.plydot.mtnmomoapi.model.collections.Request2PayStatus;
@@ -98,18 +95,6 @@ public class HttpRoutines {
         }
     }
 
-    public CheckBalanceResponse checkAccountBalance() {
-        try {
-            Response<CheckBalanceResponse> response = service.checkAccountBalance().execute();
-            checkResponse(response);
-            Objects.requireNonNull(response.body()).setStatus(Status.OK.toString());
-            return response.body();
-        } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
-            e.printStackTrace();
-            return new CheckBalanceResponse(e.getMessage());
-        }
-    }
-
     public Request2Pay collectionsRequest2Pay(Request2Pay request2Pay){
         try {
             Response<Void> response = service.request2Pay(request2Pay).execute();
@@ -156,9 +141,19 @@ public class HttpRoutines {
         }
     }
 
-    public Status isAccountActive(String account, PayeIDType type){
+    public Status isAccountActive(String account, PayeIDType type, Products product){
         try {
-            Response<Void> response = service.isAccountHolderActive(type.toString(), account).execute();
+            Response<Void> response;
+            switch (product){
+                case COLLECTIONS:
+                    response = service.isCollectionsAccountHolderActive(type.toString(), account).execute();
+                    break;
+                case DISBURSEMENTS:
+                    response = service.isDisbursementAccountHolderActive(type.toString(), account).execute();
+                    break;
+                default:
+                    throw new NullPointerException("Unsupported Product");
+            }
             checkResponse(response);
             return Status.OK;
         } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
@@ -167,14 +162,70 @@ public class HttpRoutines {
         }
     }
 
-    public AccountBalance getCollectionsAccountBalance(){
+    public AccountBalance getAccountBalance(Products product){
         try {
-            Response<AccountBalance> response = service.getCollectionsAccountBalance().execute();
+            Response<AccountBalance> response;
+            switch (product){
+                case COLLECTIONS:
+                    response = service.getCollectionsAccountBalance().execute();
+                    break;
+                case DISBURSEMENTS:
+                    response = service.getDisbursementAccountBalance().execute();
+                    break;
+                default:
+                    throw new NullPointerException("Unsupported Product");
+            }
             checkResponse(response);
             return response.body();
         } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
             e.printStackTrace();
             return new AccountBalance(e.getMessage());
+        }
+    }
+
+    public TransferPostPayload transferRequest(TransferPostPayload payload){
+        try {
+            Response<Void> response = service.transfer(payload).execute();
+            checkResponse(response);
+            payload.setStatus(Status.ACCEPTED.toString());
+            return payload;
+        } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            payload.setStatus(e.getMessage());
+            return payload;
+        }
+    }
+
+    public TransferGetResponse checkTransferStatus(String XReferenceId){
+        try {
+            Response<TransferGetResponse> response = service.checkTransferStatus(XReferenceId).execute();
+            checkResponse(response);
+            TransferGetResponse status = response.body();
+            if (status != null) {
+                return status;
+            }else {
+                throw new NullPointerException();
+            }
+        } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return new TransferGetResponse(e.getMessage());
+        }
+    }
+
+    public TransferGetResponse checkTransferStatus(TransferPostPayload payload){
+        try {
+            Response<TransferGetResponse> response = service.checkTransferStatus(payload.getXreferenceId()).execute();
+            checkResponse(response);
+            TransferGetResponse status = response.body();
+            if (status != null) {
+                status.setTransferPostPayload(payload);
+                return status;
+            }else {
+                throw new NullPointerException();
+            }
+        } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return new TransferGetResponse(e.getMessage());
         }
     }
 }

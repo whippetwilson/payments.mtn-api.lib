@@ -10,7 +10,7 @@ import com.plydot.mtnmomoapi.utils.PayeIDType;
 import java.util.UUID;
 
 public class Collections implements ICollections {
-    private final Auth auth;
+    protected final Auth auth;
     private BaseCollections collections;
 
     public Collections(String XReferenceId, String collectionsSubscriptionKey,
