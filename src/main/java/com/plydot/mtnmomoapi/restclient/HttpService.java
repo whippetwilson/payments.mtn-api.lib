@@ -3,6 +3,7 @@ package com.plydot.mtnmomoapi.restclient;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.plydot.mtnmomoapi.products.Enviroments;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import org.aaronhe.threetengson.ThreeTenGsonAdapter;
@@ -41,23 +42,28 @@ class HttpService {
             requestBuilder.addHeader("Accept", "application/json");
             if (settings.getPrimarySubscriptionKey() != null)
                 requestBuilder.addHeader(Headers.SUBSCRIPTION_KEY, settings.getPrimarySubscriptionKey());
-            if (settings.getxReferenceId() != null){
+            if (settings.getxReferenceId() != null) {
                 requestBuilder.addHeader(Headers.X_REFERENCE_ID, settings.getxReferenceId());
             }
-            if (settings.getEnviroment() != null){
+            if (settings.getEnviroment() != null) {
                 requestBuilder.addHeader(Headers.X_TARGET_ENVIROMENT, settings.getEnviroment());
             }
             if (settings.getAccessToken() != null) {
                 requestBuilder.addHeader(Headers.AUTHORIZATION, settings.getAccessToken().getAccessToken());
-            }else if (settings.getAuthorization() != null)
+            } else if (settings.getAuthorization() != null)
                 requestBuilder.addHeader(Headers.AUTHORIZATION, settings.getAuthorization());
             Request request = requestBuilder.build();
-            System.out.println(new Gson().toJson(request));
+            if (settings.getEnviroment().equals(Enviroments.SAND_BOX))
+                System.out.println(new Gson().toJson(request));
             return chain.proceed(request);
         });
 
+        String baseUrl = ConnectConstants.DEFAULT_URL;
+        if (settings.getEnviroment().equals(Enviroments.PRODUCTION))
+            baseUrl = ConnectConstants.PRODUCTION_URL;
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ConnectConstants.DEFAULT_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(httpClient.build())
                 .build();
