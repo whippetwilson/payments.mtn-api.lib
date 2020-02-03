@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.plydot</groupId>
-    <artifactId>mtn-payments</artifactId>
-    <version>1.01-SNAPSHOT</version>
+    <artifactId>mtnmomoapi</artifactId>
+    <version>1.17-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>mtn-momoapi-java-library</name>
+    <name>mtn-momoapi-java-plugin</name>
     <description>This is a java plugin to allow developers using the mtn momo api in Uganda to get ahead to productivity rather than dwell down in the semantics of authentication, authorization and request wrappers.</description>
     <url>https://github.com/plydot/mtn-momo-java-plugin.git</url>
     <developers>
@@ -13,7 +13,7 @@
             <name>Whippet Wilson</name>
             <organization>Plydot Systems</organization>
             <url>https://plydot.com</url>
-            <email>whippet@plydot.com</email>
+            <email>connect@plydot.com</email>
             <id>whippetwilson</id>
         </developer>
     </developers>
@@ -127,7 +127,7 @@
         <connection>scm:git:git://github.com/plydot/mtn-momo-java-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:plydot/mtn-momo-java-plugin.git</developerConnection>
         <url>https://github.com/plydot/mtn-momo-java-plugin.git</url>
-        <tag>mtn-payments-1.0</tag>
+        <tag>mtnmomoapi-1.0</tag>
     </scm>
 
     <profiles>
@@ -187,11 +187,11 @@
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
             <version>1.6</version>
         </dependency>
-
     </dependencies>
 </project>

@@ -11,6 +11,7 @@ import com.plydot.mtnmomoapi.restclient.Settings;
 import com.plydot.mtnmomoapi.utils.PayeIDType;
 import com.plydot.mtnmomoapi.utils.Status;
 
+import java.io.NotActiveException;
 import java.util.UUID;
 
 class BaseCollections {
@@ -46,7 +47,7 @@ class BaseCollections {
     }
 
     public Request2PayStatus request2Pay(String amount, String currency, String account,
-                                         String message, PayeIDType payeIDType, UUID externalId, String XreferenceId) {
+                                         String message, PayeIDType payeIDType, UUID externalId, String XreferenceId) throws NotActiveException {
         if (isAccountActive(account, payeIDType).toString().equals(Status.OK.toString())) {
             String reference = getReference(XreferenceId);
             Request2Pay request2Pay =  getRequestBody(amount, currency, account, message, payeIDType, externalId, reference);
@@ -99,7 +100,7 @@ class BaseCollections {
         return request2Pay;
     }
 
-    public Request2PayStatus getRequest2PayStatus(String XReferenceId) {
+    public Request2PayStatus getRequest2PayStatus(String XReferenceId) throws NotActiveException {
         settings.setAccessToken(getToken());
         settings.setPrimarySubscriptionKey(auth.getPrimarySubscriptionKey());
         routines.setSettings(settings);
