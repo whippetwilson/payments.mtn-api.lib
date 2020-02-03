@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.plydot</groupId>
     <artifactId>mtnmomoapi</artifactId>
-    <version>1.13-SNAPSHOT</version>
+    <version>1.17-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>mtn-momoapi-java-plugin</name>
     <description>This is a java plugin to allow developers using the mtn momo api in Uganda to get ahead to productivity rather than dwell down in the semantics of authentication, authorization and request wrappers.</description>

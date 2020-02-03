@@ -14,9 +14,9 @@ public class Collections implements ICollections {
     private BaseCollections collections;
 
     public Collections(String XReferenceId, String collectionsSubscriptionKey,
-                       String callBackUrl, String enviroment) {
+                       String callBackUrl, String enviroment, String apiKey) {
         auth = new Auth(callBackUrl, XReferenceId, collectionsSubscriptionKey);
-        this.collections = new BaseCollections(auth, enviroment);
+        this.collections = new BaseCollections(auth, enviroment, apiKey);
     }
 
     @Override

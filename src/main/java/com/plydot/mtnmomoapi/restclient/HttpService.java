@@ -53,14 +53,12 @@ class HttpService {
             } else if (settings.getAuthorization() != null)
                 requestBuilder.addHeader(Headers.AUTHORIZATION, settings.getAuthorization());
             Request request = requestBuilder.build();
-            if (settings.getEnviroment().equals(Enviroments.SAND_BOX))
+//            if (settings.getEnviroment().equals(Enviroments.SAND_BOX))
                 System.out.println(new Gson().toJson(request));
             return chain.proceed(request);
         });
 
         String baseUrl = ConnectConstants.DEFAULT_URL;
-        if (settings.getEnviroment().equals(Enviroments.PRODUCTION))
-            baseUrl = ConnectConstants.PRODUCTION_URL;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)

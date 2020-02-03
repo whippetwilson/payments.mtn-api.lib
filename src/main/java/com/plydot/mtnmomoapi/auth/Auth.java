@@ -22,14 +22,14 @@ public class Auth {
     private Auth() {
     }
 
-    public Auth(String callBackHost, String XReferenceId, String primarySubscriptionKey){
+    public Auth(String callBackHost, String XReferenceId, String primarySubscriptionKey) {
         auth.callBackHost = callBackHost;
         this.callBackHost = callBackHost;
         this.XReferenceId = XReferenceId;
         this.primarySubscriptionKey = primarySubscriptionKey;
     }
 
-    public String createUser(){
+    public String createUser() {
         this.settings.setxReferenceId(this.XReferenceId);
         this.settings.setPrimarySubscriptionKey(this.primarySubscriptionKey);
         this.settings.setCreateApiUserBody(new CreateApiUserBody(this.callBackHost));
@@ -38,7 +38,7 @@ public class Auth {
         return routines.createUser();
     }
 
-    public GetUserResponse getUser(){
+    public GetUserResponse getUser() {
         settings.setxReferenceId(XReferenceId);
         settings.setPrimarySubscriptionKey(primarySubscriptionKey);
         settings.setAccessToken(null);
@@ -46,27 +46,30 @@ public class Auth {
         return routines.getUser();
     }
 
-    private GetApiKeyResponse getApiKey(){
+    private GetApiKeyResponse getApiKey() {
         settings.setxReferenceId(XReferenceId);
         settings.setPrimarySubscriptionKey(primarySubscriptionKey);
         settings.setAccessToken(null);
         routines.setSettings(settings);
-        return routines.getApiKey();
+        if (settings.getEnviroment().equals(Enviroments.PRODUCTION)) {
+            return new GetApiKeyResponse(settings.getProductionApiKey(), Status.OK.toString());
+        }
+        else return routines.getApiKey();
     }
 
     public TokenResponse getToken(Products productId) throws IllegalAccessException {
         settings.setxReferenceId(XReferenceId);
-        if (this.apiKey != null && this.apiKey.getStatus().equals(Status.OK.toString())){
+        if (this.apiKey != null && this.apiKey.getStatus().equals(Status.OK.toString())) {
             settings.setApiKey(this.apiKey.getApiKey());
             settings.setPrimarySubscriptionKey(primarySubscriptionKey);
             settings.setAccessToken(null);
             routines.setSettings(settings);
             return routines.getToken(productId);
-        }else {
+        } else {
             this.apiKey = getApiKey();
             if (this.apiKey.getStatus().equals(Status.OK.toString())) {
                 return getToken(productId);
-            }else {
+            } else {
                 throw new IllegalArgumentException("API KEY NOT_FOUND, DID YOU INITIALIZE AN API USER?");
             }
         }

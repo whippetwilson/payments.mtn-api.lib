@@ -16,8 +16,8 @@ import java.util.UUID;
 
 public class BaseDisbursements extends BaseCollections {
 
-    BaseDisbursements(Auth auth, String enviroment) {
-        super(auth, enviroment);
+    BaseDisbursements(Auth auth, String enviroment, String prodApiKey) {
+        super(auth, enviroment, prodApiKey);
     }
 
     @Override

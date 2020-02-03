@@ -20,9 +20,10 @@ class BaseCollections {
     protected Auth auth;
     private TokenResponse token = null;
 
-    BaseCollections(Auth auth, String enviroment) {
+    BaseCollections(Auth auth, String enviroment, String prodApiKey) {
         this.auth = auth;
         settings.setEnviroment(enviroment);
+        settings.setProductionApiKey(prodApiKey);
     }
 
     public Products getProduct() {
