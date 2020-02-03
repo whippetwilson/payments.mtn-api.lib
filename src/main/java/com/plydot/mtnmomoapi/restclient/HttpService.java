@@ -53,6 +53,7 @@ class HttpService {
             } else if (settings.getAuthorization() != null)
                 requestBuilder.addHeader(Headers.AUTHORIZATION, settings.getAuthorization());
             Request request = requestBuilder.build();
+
 //            if (settings.getEnviroment().equals(Enviroments.SAND_BOX))
                 System.out.println(new Gson().toJson(request));
             return chain.proceed(request);
