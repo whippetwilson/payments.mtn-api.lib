@@ -6,6 +6,7 @@ import com.plydot.mtnmomoapi.model.collections.AccountBalance;
 import com.plydot.mtnmomoapi.model.collections.Request2PayStatus;
 import com.plydot.mtnmomoapi.utils.PayeIDType;
 
+import java.io.NotActiveException;
 import java.util.UUID;
 
 public interface ICollections {
@@ -33,23 +34,23 @@ public interface ICollections {
      */
 
     Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
-                                                PayeIDType payeIDType, UUID externalId, String Xreference);
+                                                PayeIDType payeIDType, UUID externalId, String Xreference) throws NotActiveException;
 
     Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
-                                                PayeIDType payeIDType);
+                                                PayeIDType payeIDType) throws NotActiveException;
 
     Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
-                                                PayeIDType payeIDType, UUID externalId);
+                                                PayeIDType payeIDType, UUID externalId) throws NotActiveException;
 
     Request2PayStatus makeCollectionRequest2Pay(String amount, String currency, String account, String message,
-                                                PayeIDType payeIDType, String XreferenceId);
+                                                PayeIDType payeIDType, String XreferenceId) throws NotActiveException;
 
     /**
      * Checks for status of pay request
      * @param referenceId Can be obtained from the Request2PayStatus after making the request
      * @return Status
      */
-    Request2PayStatus checkRequest2PayStatus(String referenceId);
+    Request2PayStatus checkRequest2PayStatus(String referenceId) throws NotActiveException;
 
     /**
      * Get your collections account balance

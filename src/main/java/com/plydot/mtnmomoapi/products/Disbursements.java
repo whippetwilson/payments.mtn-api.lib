@@ -13,9 +13,9 @@ public class Disbursements extends Collections implements IDisbursements {
     private BaseDisbursements disbursements;
 
     public Disbursements(String XReferenceId, String disbursementSubscriptionKey,
-                         String callBackUrl, String enviroment) {
-        super(XReferenceId, disbursementSubscriptionKey, callBackUrl, enviroment);
-        this.disbursements = new BaseDisbursements(auth, enviroment);
+                         String callBackUrl, String enviroment, String prodApiKey) {
+        super(XReferenceId, disbursementSubscriptionKey, callBackUrl, enviroment, prodApiKey);
+        this.disbursements = new BaseDisbursements(auth, enviroment, prodApiKey);
     }
 
     @Override

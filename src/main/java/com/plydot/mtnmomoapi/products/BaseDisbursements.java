@@ -5,19 +5,17 @@ import com.google.gson.GsonBuilder;
 import com.plydot.mtnmomoapi.auth.Auth;
 import com.plydot.mtnmomoapi.model.TransferGetResponse;
 import com.plydot.mtnmomoapi.model.TransferPostPayload;
-import com.plydot.mtnmomoapi.model.collections.Payer;
-import com.plydot.mtnmomoapi.model.collections.Request2Pay;
 import com.plydot.mtnmomoapi.model.collections.Request2PayStatus;
 import com.plydot.mtnmomoapi.utils.PayeIDType;
 import com.plydot.mtnmomoapi.utils.Status;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.NotActiveException;
 import java.util.UUID;
 
 public class BaseDisbursements extends BaseCollections {
 
-    BaseDisbursements(Auth auth, String enviroment) {
-        super(auth, enviroment);
+    BaseDisbursements(Auth auth, String enviroment, String prodApiKey) {
+        super(auth, enviroment, prodApiKey);
     }
 
     @Override
@@ -28,13 +26,13 @@ public class BaseDisbursements extends BaseCollections {
     @Override
     public Request2PayStatus request2Pay(String amount, String currency, String account,
                                          String message, PayeIDType payeIDType, UUID externalId,
-                                         String XreferenceId) {
-        throw new NotImplementedException();
+                                         String XreferenceId) throws NotActiveException {
+        throw new NotActiveException();
     }
 
     @Override
-    public Request2PayStatus getRequest2PayStatus(String XReferenceId) {
-        throw new NotImplementedException();
+    public Request2PayStatus getRequest2PayStatus(String XReferenceId) throws NotActiveException {
+        throw new NotActiveException();
     }
 
     public TransferGetResponse transfer(String amount, String currency, String account,

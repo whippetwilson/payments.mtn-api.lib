@@ -23,6 +23,7 @@ public final class Settings {
     private TokenResponse accessToken;
     private String enviroment;
     private String currency;
+    private String productionApiKey;
 
     public String getApiKey() {
         return apiKey;
@@ -101,5 +102,13 @@ public final class Settings {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getProductionApiKey() {
+        return productionApiKey;
+    }
+
+    public void setProductionApiKey(String productionApiKey) {
+        this.productionApiKey = productionApiKey;
     }
 }

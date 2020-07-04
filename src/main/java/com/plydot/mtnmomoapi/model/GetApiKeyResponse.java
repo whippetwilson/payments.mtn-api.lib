@@ -13,8 +13,16 @@ public class GetApiKeyResponse {
 
     private String status;
 
+    public GetApiKeyResponse(String apiKey, String status) {
+        this.apiKey = apiKey;
+        this.status = status;
+    }
+
     public GetApiKeyResponse(String status) {
         this.status = status;
+    }
+
+    public GetApiKeyResponse() {
     }
 
     public String getStatus() {

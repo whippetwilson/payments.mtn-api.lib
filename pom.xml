@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.plydot</groupId>
     <artifactId>mtnmomoapi</artifactId>
-    <version>1.13-SNAPSHOT</version>
+    <version>1.18-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>mtn-momoapi-java-plugin</name>
     <description>This is a java plugin to allow developers using the mtn momo api in Uganda to get ahead to productivity rather than dwell down in the semantics of authentication, authorization and request wrappers.</description>
@@ -127,7 +127,7 @@
         <connection>scm:git:git://github.com/plydot/mtn-momo-java-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:plydot/mtn-momo-java-plugin.git</developerConnection>
         <url>https://github.com/plydot/mtn-momo-java-plugin.git</url>
-        <tag>mtnmomoapi-1.0</tag>
+        <tag>mtnmomoapi-1.17</tag>
     </scm>
 
     <profiles>
@@ -186,6 +186,12 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
         </dependency>
     </dependencies>
 </project>
