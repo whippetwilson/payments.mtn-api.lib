@@ -7,13 +7,13 @@ This is a java plugin to allow developers using the mtn momo api in Uganda to ge
 <dependency>
     <groupId>com.plydot</groupId>
     <artifactId>mtnmomoapi</artifactId>
-    <version>1.11</version>
-</dependency> 
+    <version>1.18</version>
+</dependency>
 ~~~~
 
 ## Gradle Intergration
 ~~~~
-implementation 'com.plydot:mtnmomoapi:1.11'
+implementation 'com.plydot:mtnmomoapi:1.18'
 ~~~~
 
 ## Demo 
